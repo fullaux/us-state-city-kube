@@ -1,0 +1,15 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: fa-postgres-pv-rev
+  labels:
+    type: local
+    app: fa-postgres-rev
+spec:
+  storageClassName: hostpath
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data

@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: fa-postgres-rev
+  labels:
+    app: fa-postgres-rev
+spec:
+  template:
+    metadata:
+      labels:
+        app: fa-postgres-rev
+    spec:
+      containers:
+        - image: "postgres:9.6.2"
+          name: postgres
+          env:
+            - name: PGDATA
+              valueFrom:
+                configMapKeyRef:
+                  name: fa-postgres-config-rev
+                  key: postgres_data
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: fa-postgres-pv-rev
+              mountPath: /var/lib/postgresql/data/pgdata            
+      volumes:
+        - name: fa-postgres-pv-rev
+          persistentVolumeClaim:
+            claimName: fa-postgres-pv-claim-rev

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fa-postgres-config-rev
+  namespace: default
+  labels:
+    app: fa-postgres-rev
+data:
+  postgres_db: fullaux
+  postgres_password: fa4data
+  postgres_user: fa
+  postgres_data: "/mnt/data/postgresql/data/pgdata"
